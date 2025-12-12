@@ -1,9 +1,9 @@
 #include "lm35.h"
 #include "config_bits.h"
 
-// ----------------------------------------------------
+
 // Initialise ADC for LM35 temperature sensor
-// ----------------------------------------------------
+
 // The LM35 is connected to AN6, which corresponds to
 // analogue channel on pin RE1. Only this pin is set
 // as analogue input; other PORTE pins remain digital.
@@ -29,9 +29,9 @@ void LM35_Init(void) {
     ADCON0bits.ADON = 1;
 }
 
-// ----------------------------------------------------
+
 // Read temperature value from LM35 in °C
-// ----------------------------------------------------
+
 // Starts an ADC conversion, waits for completion,
 // then converts the 10-bit result into degrees Celsius
 // using integer arithmetic (no floating-point).
@@ -44,8 +44,6 @@ unsigned int LM35_Read_Temp(void) {
     // Combine high and low ADC result registers
     unsigned int adc_val = (ADRESH << 8) + ADRESL;
 
-    // LM35 outputs 10 mV per °C
-    // ADC step ? 4.88 mV at 5 V reference
     // Scaling converts ADC value directly to °C
     unsigned long temp = (unsigned long)adc_val * 500;
 
