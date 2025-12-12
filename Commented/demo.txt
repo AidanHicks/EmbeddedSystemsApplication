@@ -1,0 +1,19 @@
+1) Code commented 
+
+2) Understanding of LM35 ADC conversion and scaling
+- 10mV per C
+- To read this voltage, it uses 10bit ADC to convert alalogue voltage into a digital number
+- Main is always reading current temp and updating sevenseg
+
+
+
+3) Understanding of LCD + Update logic
+- LCD runs in 4bit mode, each char is sent in 2 nibbles
+- Each nibble placed on D4-D7
+-
+
+4) Understanding of SevenSeg multiplexing and update logic
+- Uses segment lines PORTD
+- Individual digits are selected by RA0-RA3
+- Only one digit can be lit at a time, so we use multiplexing:
+	-Timer0 refreshes display every 2ms
