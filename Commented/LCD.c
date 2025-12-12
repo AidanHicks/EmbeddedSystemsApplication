@@ -1,11 +1,11 @@
 #include "lcd.h"
 #include "config_bits.h"
 
-// ----------------------------------------------------
+
 // Send a 4-bit nibble to the LCD (4-bit interface)
-// ----------------------------------------------------
-// The LCD is operated in 4-bit mode to save I/O pins.
-// Each byte is therefore sent as two nibbles (high then low).
+// The LCD is operated in 4-bit mode 
+// Each char is sent as two nibbles (high then low).
+
 void LCD_Nibble(char nibble) {
     // Output the nibble bits onto LCD data lines D4?D7
     LCD_D4 = (nibble >> 0) & 1;
@@ -20,9 +20,9 @@ void LCD_Nibble(char nibble) {
     __delay_us(50);
 }
 
-// ----------------------------------------------------
+
 // Send a command byte to the LCD (RS = 0)
-// ----------------------------------------------------
+
 // Commands control LCD behaviour such as clearing the
 // display or moving the cursor.
 void LCD_Cmd(char cmd) {
@@ -32,9 +32,9 @@ void LCD_Cmd(char cmd) {
     __delay_ms(2);                // Command execution delay
 }
 
-// ----------------------------------------------------
+
 // Write a single character to the LCD (RS = 1)
-// ----------------------------------------------------
+
 // Character data is written into the LCD DDRAM and
 // appears at the current cursor position.
 void LCD_Char(char dat) {
@@ -44,9 +44,9 @@ void LCD_Char(char dat) {
     __delay_us(50);               // Short data hold delay
 }
 
-// ----------------------------------------------------
+
 // Initialise the LCD module
-// ----------------------------------------------------
+
 // Follows the HD44780 initialisation sequence to force
 // the LCD into a known 4-bit operating mode.
 void LCD_Init(void) {
@@ -69,9 +69,9 @@ void LCD_Init(void) {
     LCD_Clear();                  // Clear display and reset cursor
 }
 
-// ----------------------------------------------------
+
 // Write a null-terminated string to the LCD
-// ----------------------------------------------------
+
 // Characters are written sequentially starting from
 // the current cursor position.
 void LCD_String(const char* str) {
@@ -79,9 +79,9 @@ void LCD_String(const char* str) {
         LCD_Char(*str++);
 }
 
-// ----------------------------------------------------
+
 // Set LCD cursor position
-// ----------------------------------------------------
+
 // Row 1 corresponds to DDRAM address 0x80
 // Row 2 corresponds to DDRAM address 0xC0
 void LCD_Set_Cursor(unsigned char row, unsigned char col) {
@@ -94,9 +94,9 @@ void LCD_Set_Cursor(unsigned char row, unsigned char col) {
     LCD_Cmd(address);
 }
 
-// ----------------------------------------------------
+
 // Clear LCD display
-// ----------------------------------------------------
+
 // Clears all characters and resets cursor to (0,0).
 void LCD_Clear(void) {
     LCD_Cmd(0x01);                // Clear display command
